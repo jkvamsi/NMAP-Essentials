@@ -1,0 +1,25 @@
+Nmap is a tool to scan networks for different things like port scanning,os scanning,vulnerability scanning etc...
+Nmap can be used to connect with target in different ways like tcp,udp,syn,etc...
+For TCP:
+TCP protocol works based on three-way handshake..the three-way handshake consists of three stages. First the connecting terminal sends a TCP request to the target server with the SYN flag set. The server then acknowledges this packet with a TCP response containing the SYN flag, as well as the ACK flag. Finally, our terminal completes the handshake by sending a TCP request with the ACK flag set.
+-sT switch can be used to connect to a network using tcp.
+nmap -sT [target/ip address]
+For UDP:
+UDP is a connectionless protocol.When a packet is sent to an open UDP port, there should be no response. When this happens, Nmap refers to the port as being open|filtered. In other words, it suspects that the port is open, but it could be firewalled. If it gets a UDP response (which is very unusual), then the port is marked as open. More commonly there is no response, in which case the request is sent a second time as a double-check. If there is still no response then the port is marked open|filtered and Nmap moves on.
+-sU switch can be used to scan a network using udp.
+nmap -sU [target/ip address]
+For SYN:
+Syn scan is more like a tcp scan which is used to scan tcp port range of a target. SYN scans are sometimes referred to as "Half-open" scans, or "Stealth" scans.SYN scans sends back a RST TCP packet after receiving a SYN/ACK from the server (this prevents the server from repeatedly trying to make the request).
+Advantages of Syn:
+It can be used to bypass older Intrusion Detection systems as they are looking out for a full three way handshake. This is often no longer the case with modern IDS solutions; it is for this reason that SYN scans are still frequently referred to as "stealth" scans.
+SYN scans are often not logged by applications listening on open ports, as standard practice is to log a connection once it's been fully established. Again, this plays into the idea of SYN scans being stealthy.
+Without having to bother about completing (and disconnecting from) a three-way handshake for every port, SYN scans are significantly faster than a standard TCP Connect scan.
+Disadvantages:
+The main disadvantage of SYN is that it requires sudo(i.e..root) permissions for sending packets to a server.
+-sS switch can be used to perform syn scan on a network
+nmap -sS [target/ip address]
+Another type of scans are Null,Fin and Xmas...the main purpose of these scans is to bypass the firewall protection.
+The different switches used for performing these scans are -sN,-sF,-sX.
+nmap -sN [target/ip address]
+nmap -sF [target/ip address]
+nmap -sX [target/ip address]
